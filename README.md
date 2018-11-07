@@ -1,2 +1,2 @@
 # app_comments_spider
-爬取各个平台上app的评论
+爬取各个平台上对于某款app的评论
