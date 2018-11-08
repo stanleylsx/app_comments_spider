@@ -9,7 +9,7 @@ class AppstoreSpider(XMLFeedSpider):
     namespaces = [('atom', 'http://www.w3.org/2005/Atom'), ('im', 'http://itunes.apple.com/rss')]
     # id后面的参数是app在appstore下面的id,这里是爬取的qq炫舞的评论为例,它的id是1219233424
     start_urls = [
-        'https://itunes.apple.com/cn/rss/customerreviews/page={}/id=1219233424/sortby=mostrecent/xml'.format(i, id)
+        'https://itunes.apple.com/cn/rss/customerreviews/page={}/id=1219233424/sortby=mostrecent/xml'.format(i)
         for i in range(1, 11)]
     iterator = 'xml'
     itertag = 'atom:entry'
