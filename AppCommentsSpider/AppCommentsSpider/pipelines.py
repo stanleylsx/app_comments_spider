@@ -6,8 +6,10 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import MySQLdb
+import logging
 import MySQLdb.cursors
 from twisted.enterprise import adbapi
+logger = logging.getLogger(__name__)
 
 
 class AppcommentsspiderPipeline(object):
@@ -47,8 +49,8 @@ class AppcommentsspiderPipeline(object):
         query.addErrback(self.handle_error, item, spider)
 
     def handle_error(self, failure, item, spider):
-        # 处理异步插入的异常
-        print(failure)
+        # log中写入异步插入的异常
+        logging.error(failure)
 
     def do_insert(self, cursor, item):
         """

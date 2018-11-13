@@ -98,10 +98,10 @@ AUTOTHROTTLE_ENABLED = True
 
 
 # 数据库的配置(在此配置数据库的地址,数据库的名字,数据库的账号和密码)
-MYSQL_HOST = ""
-MYSQL_DBNAME = ""
-MYSQL_USER = ""
-MYSQL_PASSWORD = ""
+MYSQL_HOST = ''
+MYSQL_DBNAME = ''
+MYSQL_USER = ''
+MYSQL_PASSWORD = ''
 
 # redis的配置(在此配置redis的地址还有auth密码)
 REDIS_HOST = ''
@@ -112,3 +112,7 @@ REDIS_AUTH = {'password': ''}
 
 # 配置随机的User-Agent
 RANDOM_UA_TYPE = "random"
+
+# 日志相关的输出
+LOG_LEVEL = 'DEBUG'
+LOG_FILE = 'log/spider_log.log'
