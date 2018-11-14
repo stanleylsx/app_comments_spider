@@ -102,7 +102,7 @@ class WeiBoSpider(scrapy.Spider):
         pages = cards_total / 10
         for i in range(int(pages) + 1):
             cards_url = self.cards.format(self.uid, self.tab_id, i + 1)
-            yield scrapy.Request(cards_url, self.parse_cards, dont_filter=True)
+            yield scrapy.Request(cards_url, self.parse_cards)
 
     def parse_cards(self, response):
         """
@@ -125,7 +125,7 @@ class WeiBoSpider(scrapy.Spider):
                     pages = math.ceil(comments_num/10)
                     for i in range(pages):
                         yield scrapy.Request(self.comments.format(card_id, i+1), meta=para,
-                                             callback=self.parse_comments, dont_filter=True)
+                                             callback=self.parse_comments)
 
     def parse_comments(self, response):
         """

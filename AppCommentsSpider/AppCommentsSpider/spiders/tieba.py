@@ -20,7 +20,7 @@ class TiebaSpider(RedisSpider):
         all_urls = re.findall('href="(/p/\d+)"', response.text, re.DOTALL)
         all_urls = [parse.urljoin(response.url, url)+'?see_lz=1' for url in all_urls]
         for url in all_urls:
-            yield scrapy.Request(url, callback=self.parse_tiezi, dont_filter=True)
+            yield scrapy.Request(url, callback=self.parse_tiezi)
         next_page = re.findall('<a href="(//tieba.baidu.com/f\?kw=.*)" class="next', response.text)[0]
         next_page = parse.urljoin(response.url, next_page)
         if next_page:

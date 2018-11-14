@@ -6,7 +6,7 @@ import scrapy
 
 class TaptapSpider(RedisSpider):
     name = 'taptap'
-    allowed_domains = ['https://www.taptap.com/']
+    allowed_domains = ['taptap.com']
     redis_key = 'taptap:start_urls'
 
     def parse(self, response):
@@ -41,6 +41,6 @@ class TaptapSpider(RedisSpider):
             reviews_loader = item_loader.load_item()
             yield reviews_loader
         if next_url:
-            yield scrapy.Request(url=next_url, callback=self.parse_reviews, dont_filter=True)
+            yield scrapy.Request(url=next_url, callback=self.parse_reviews)
 
 

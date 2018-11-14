@@ -116,3 +116,8 @@ RANDOM_UA_TYPE = "random"
 # 日志相关的输出
 LOG_LEVEL = 'DEBUG'
 LOG_FILE = 'log/spider_log.log'
+
+# 配置bloomfilter的哈希函数个数和去重用的bit位数
+BLOOMFILTER_HASH_NUMBER = 6
+BLOOMFILTER_BIT = 23
+
