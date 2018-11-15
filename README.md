@@ -9,7 +9,7 @@
 ```
 127.0.0.1:6379> lpush taptap:start_urls https://www.taptap.com/app/2301
 ```
-### appstore的api爬虫
+### Appstore的api爬虫
 &emsp;&emsp;这里只是通过appstore给的api接口获取某个app的最近500条评论，爬取前需要获得这个app的id，在[appstore应用](https://itunes.apple.com/cn/genre/%E9%9F%B3%E4%B9%90/id36)中找到对应的app，这里以QQ炫舞为例，进入[它的页面](https://itunes.apple.com/cn/app/qq%E7%82%AB%E8%88%9E/id1219233424?mt=8)之后，浏览器url中包含的1219233424就是这个游戏的id。把它填写在AppCommentsSpider/spiders/appstore.py中的start_urls中，然后运行launch获得评论。
 ### Baidu贴吧爬虫
 &emsp;&emsp;运行launch之后，scrapy会监听redis中的tieba:start_urls这个key，需要手动在redis中加入一个start_urls(这里以王者荣耀的tieba为例):
@@ -35,7 +35,7 @@
 &emsp;&emsp;布隆过滤器只会判断不存在，绝不会多插入一条重复的数据，对于大数据，有忍耐很小部分丢失的情况下，布隆过滤器效率相当高。关于布隆过滤器的更多原理和误差可以看[这篇文章](https://cloud.tencent.com/developer/article/1084962)。在本项目中，引入了bloomfilter，它在redis中的类型为string，本项目中数据量大概在百万级别，利用了6个哈希函数，需要至少600W个位数的bit，所以开辟了一个长度为23位的bit段，2的23次方等于8388608，可以处理800W个网页的指纹，其在内存中所占用的内存才1MB。由此可见，利用bloomfilter既能够节省空间又能够提高去重效率，在有一定损失的情况下是一个很好的过滤器。  
 &emsp;&emsp;每次爬取完，这个去重的bit都会持久保存在redis中，所以下次重启爬虫的时候，可以不再重复爬取，这里就做到了持久化爬取。
 ### 过滤器参数设置
-&emsp;&emsp;AppCommentsSpider/settings可以通过以下两个字段分别设置hash函数的个数和bit的位数，这里默认为6个哈希函数和23个比特。
+&emsp;&emsp;在AppCommentsSpider/settings中可以通过以下两个字段分别设置hash函数的个数和bit的位数，这里默认为6个哈希函数和23个比特。
 ```
 BLOOMFILTER_HASH_NUMBER = 6
 BLOOMFILTER_BIT = 23
