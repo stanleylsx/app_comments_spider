@@ -8,12 +8,13 @@ import re
 
 class TiebaSpider(RedisSpider):
     name = 'tieba'
-    allowed_domains = ['https://tieba.baidu.com/']
+    allowed_domains = ['tieba.baidu.com']
     redis_key = 'tieba:start_urls'
 
     def parse(self, response):
         """
         获取贴吧的页面，获得本页所有的帖子
+        这里下一页next_page不做过滤处理,但是每个帖子都有单独的url,所以要对all_urls中的url去重
         :param response:
         :return:
         """

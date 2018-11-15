@@ -7,7 +7,7 @@ from items import WeibospiderItem, WeibospiderItemLoader
 
 class WeiBoSpider(scrapy.Spider):
     name = 'weibo'
-    allowed_domains = ['https://m.weibo.cn/api/']
+    allowed_domains = ['m.weibo.cn']
     redis_key = 'weibo:start_urls'
     # user_name(在此填写登陆微博的账号)
     user_name = ''
@@ -79,7 +79,7 @@ class WeiBoSpider(scrapy.Spider):
 
     def parse(self, response):
         """
-        爬取博主的所发的微博部分
+        爬取博主的所发的微博部分,发的微博的入口,这里不做过滤
         :param response:
         :return:
         """
@@ -93,7 +93,7 @@ class WeiBoSpider(scrapy.Spider):
 
     def parse_cards_info(self, response):
         """
-        获得博主所发的微博的信息
+        获得博主所发的微博的信息,爬过的微博就不要在重复爬取了
         :param response:
         :return:
         """
